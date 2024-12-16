@@ -1,0 +1,319 @@
+@import url("https://fonts.googleapis.com/css2?family=Playball&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #262626;
+}
+
+.logo {
+  width: 100px;
+  height: 100px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 80px;
+  width: 90%;
+  margin: auto;
+  border-bottom: 1px solid white;
+}
+header ul {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  -moz-column-gap: 8%;
+       column-gap: 8%;
+}
+header li {
+  color: white;
+  font-family: playfair display;
+}
+header a {
+  text-decoration: none;
+}
+header .connection-buttons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+header .connection-buttons #login {
+  border: none;
+  background-color: transparent;
+  font-family: playfair display;
+  color: white;
+  padding: 16px;
+  font-weight: 700;
+  transition: 0.5s all;
+  cursor: pointer;
+}
+header .connection-buttons #signup {
+  background-color: white;
+  border-radius: 50px;
+  color: #262626;
+  font-family: playfair display;
+  padding: 16px;
+  border: none;
+  font-weight: 700;
+  transition: 0.5s all;
+  cursor: pointer;
+}
+header .connection-buttons #signup:hover {
+  background-color: rgb(229, 229, 229);
+}
+
+.popular-articles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: -moz-max-content;
+  height: max-content;
+  margin: auto;
+  margin-top: 64px;
+  width: 90%;
+  -moz-column-gap: 88px;
+       column-gap: 88px;
+  row-gap: 88px;
+}
+.popular-articles h1 {
+  color: white;
+  font-family: playfair display;
+}
+.popular-articles .hero {
+  width: -moz-min-content;
+  width: min-content;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: start;
+  position: relative;
+}
+.popular-articles .hero button {
+  border: none;
+  background-color: transparent;
+  color: #FFC067;
+  font-family: roboto;
+  border-bottom: 1px solid #FFC067;
+  cursor: pointer;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.popular-articles .side-articles {
+  width: -moz-max-content;
+  width: max-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.popular-articles .side-articles .popular-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(3, 1fr);
+  gap: 10px;
+  width: -moz-max-content;
+  width: max-content;
+}
+.popular-articles .side-articles .details {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 320px;
+}
+.popular-articles .side-articles .details p {
+  color: white;
+  font-family: playfair display;
+}
+.popular-articles .side-articles .details .article-poster {
+  width: 100px;
+  height: 100px;
+}
+.popular-articles .side-articles .popular-article {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-bottom: 1px solid white;
+}
+.popular-articles .side-articles .popular-article .writer {
+  display: flex;
+  align-items: center;
+  width: -moz-max-content;
+  width: max-content;
+}
+.popular-articles .side-articles .popular-article .writer p {
+  color: #FFC067;
+}
+
+.overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+  z-index: 10;
+}
+
+.welcomemsg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.loginn {
+  margin: auto;
+  width: 400px;
+  height: 350px;
+  padding: 24px;
+  border: 1px solid white;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  background-color: #262626;
+  display: none;
+}
+.loginn h1 {
+  color: white;
+  width: -moz-max-content;
+  width: max-content;
+  border-bottom: 1px solid white;
+}
+.loginn form {
+  margin-top: 20px;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.loginn form input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid hsl(0, 0%, 80%);
+  padding: 8px;
+  margin-top: 12px;
+  color: white;
+  width: 100%;
+}
+.loginn form input::-moz-placeholder {
+  color: hsl(0, 0%, 80%);
+}
+.loginn form input::placeholder {
+  color: hsl(0, 0%, 80%);
+}
+.loginn button {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.577);
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 12px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: 0.4s all;
+}
+.loginn button:hover {
+  background-color: rgba(0, 0, 0, 0.277);
+}
+.loginn h5 {
+  margin-top: 18px;
+  color: white;
+  font-family: sans-serif;
+  scale: 0.9;
+}
+.loginn h5 span {
+  color: #FFC067;
+  border-bottom: 1px solid #FFC067;
+  cursor: pointer;
+}
+
+.signupp {
+  margin: auto;
+  width: 400px;
+  height: 350px;
+  padding: 24px;
+  border: 1px solid white;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100;
+  background-color: #262626;
+  display: none;
+}
+.signupp h1 {
+  color: white;
+  width: -moz-max-content;
+  width: max-content;
+  border-bottom: 1px solid white;
+}
+.signupp form {
+  margin-top: 20px;
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.signupp form input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid hsl(0, 0%, 80%);
+  padding: 8px;
+  margin-top: 12px;
+  color: white;
+  width: 100%;
+}
+.signupp form input::-moz-placeholder {
+  color: hsl(0, 0%, 80%);
+}
+.signupp form input::placeholder {
+  color: hsl(0, 0%, 80%);
+}
+.signupp button {
+  color: white;
+  background-color: rgba(0, 0, 0, 0.577);
+  border: 1px solid white;
+  border-radius: 10px;
+  padding: 12px;
+  margin-top: 20px;
+  cursor: pointer;
+  transition: 0.4s all;
+}
+.signupp button:hover {
+  background-color: rgba(0, 0, 0, 0.277);
+}
+.signupp h5 {
+  margin-top: 18px;
+  color: white;
+  font-family: sans-serif;
+  scale: 0.9;
+}
+.signupp h5 span {
+  color: #FFC067;
+  border-bottom: 1px solid #FFC067;
+  cursor: pointer;
+}/*# sourceMappingURL=style.css.map */
