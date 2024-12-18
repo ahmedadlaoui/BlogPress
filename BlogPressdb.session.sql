@@ -63,6 +63,6 @@ INSERT INTO articles (title, content, user_id) VALUES
 ('First Article by Author 2', 'This is another short article for testing. It serves as a sample article content.', 2);
 
 -- @block
-SELECT * FROM articles;
+SELECT * FROM users;
 
 

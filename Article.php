@@ -20,6 +20,5 @@
             <button id="signup">Sign Up</button>
         </div>
     </header>
-    
 </body>
 </html>

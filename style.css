@@ -7,7 +7,7 @@
 
 body {
   min-height: 100vh;
-  background-color: #262626;
+  background-color: rgb(38, 38, 38);
 }
 
 .logo {
@@ -213,6 +213,7 @@ header .connection-buttons #signup:hover {
   margin-top: 12px;
   color: white;
   width: 100%;
+  outline: none;
 }
 .loginn form input::-moz-placeholder {
   color: hsl(0, 0%, 80%);
@@ -286,6 +287,7 @@ header .connection-buttons #signup:hover {
   margin-top: 12px;
   color: white;
   width: 100%;
+  outline: none;
 }
 .signupp form input::-moz-placeholder {
   color: hsl(0, 0%, 80%);
@@ -316,4 +318,21 @@ header .connection-buttons #signup:hover {
   color: #FFC067;
   border-bottom: 1px solid #FFC067;
   cursor: pointer;
+}
+
+.togglevis {
+  position: absolute;
+  right: 0;
+  cursor: pointer;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+#vis {
+  display: block;
+  display: none;
+}
+
+#invis {
+  display: block;
 }/*# sourceMappingURL=style.css.map */

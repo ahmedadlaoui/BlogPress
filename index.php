@@ -1,42 +1,94 @@
 <?php
-$servername = "localhost"; 
-$username = "root"; 
+$servername = "localhost";
+$username = "root";
 $password = "06database@SM23";
-$dbname = "BlogPress";    
-$port = 3306;   
+$dbname = "BlogPress";
+$port = 3306;
 
 try {
     $conn = new PDO("mysql:host=$servername;dbname=$dbname;port=$port", $username, $password);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Connection failed: " . $e->getMessage());
 }
-catch(PDOException $e) {
-    echo "Connection failed: " . $e->getMessage(); 
+
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password'])) {
+        $username = trim($_POST['username']);
+        $email = trim($_POST['email']);
+        $password = trim($_POST['password']);
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        try {
+            $stmt = $conn->prepare("INSERT INTO users (username, email, password, role) VALUES (:username, :email, :password, 'visitor')");
+            $stmt->bindParam(':username', $username);
+            $stmt->bindParam(':email', $email);
+            $stmt->bindParam(':password', $hashedPassword);
+            $stmt->execute();
+
+        } catch (PDOException $e) {
+            echo "Error during signup: " . $e->getMessage();
+        }
+    }
+
+    if (isset($_POST['connectionemail']) && isset($_POST['connectionpassword'])) {
+        $connectionemail = trim($_POST['connectionemail']);
+        $connectionpassword = trim($_POST['connectionpassword']);
+
+        try {
+            $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+            $stmt->bindParam(':email', $connectionemail);
+            $stmt->execute();
+
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            if ($user && password_verify($connectionpassword, $user['password'])) {
+
+                $_SESSION['user_id'] = $user['id'];
+                $_SESSION['username'] = $user['username'];
+                $_SESSION['email'] = $user['email'];
+
+                header("Location: index.php");
+                exit;
+            } else {
+                echo "Invalid email or password!";
+            }
+        } catch (PDOException $e) {
+            echo "Error during login: " . $e->getMessage();
+        }
+    }
 }
 ?>
 
-<?php
-$stmt = $conn->prepare("SELECT * FROM users");
-$stmt->execute();
-$users = $stmt->fetchAll(PDO::FETCH_ASSOC);
-?>
+
 
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
 </head>
+
 <body>
-<div class="overlay"></div>
+    <div class="overlay"></div>
     <header>
         <a href="index.php"><img src="images/logoBP.png" alt="" class="logo"></a>
         <ul>
-            <a href="index.php"><li>Home</li></a>
-            <a href="#"><li>About Us</li></a>
-            <a href="#"><li>Your articles</li></a>
+            <a href="index.php">
+                <li>Home</li>
+            </a>
+            <a href="#">
+                <li>About Us</li>
+            </a>
+            <a href="#">
+                <li>Your articles</li>
+            </a>
         </ul>
         <div class="connection-buttons">
             <button id="login">Log in</button>
@@ -45,28 +97,34 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
     </header>
 
     <section class="loginn">
-    <div class="welcomemsg">
-    <h1>Log In</h1>
-    </div>
-        <form action="" id="login">
-            <input type="text" placeholder="Name" required>
-            <input type="email" placeholder="E-mail" required>
-            <input type="text" placeholder="Password" required>
+        <div class="welcomemsg">
+            <h1>Log In</h1>
+        </div>
+        <form action="index.php" method="POST" id="login">
+            <input type="email" name="email" placeholder="E-mail" required>
+            <div style="position: relative;width:100%;">
+                <input type="password" name="password" placeholder="Password" required id="passlog">
+                <img src="images/invisiblepassword.svg" alt="" class="togglevis" id="invis">
+                <img src="images/visiblepassword (1).svg" alt="" class="togglevis" id="vis">
+            </div>
             <h5>You don't have an account ?<span id="span-register">Register here</span></h5>
-            <button type="submit">Submit</button>
+            <button type="submit">Log In</button>
         </form>
+
     </section>
-    
+
     <section class="signupp">
-    <div class="welcomemsg">
-    <h1>Sign Up</h1>
-    </div>
-        <form action="" id="signup">
-            <input type="email" placeholder="E-mail" required>
-            <input type="text" placeholder="Password" required>
+        <div class="welcomemsg">
+            <h1>Sign Up</h1>
+        </div>
+        <form action="index.php" id="signup" name="signup" method="POST">
+            <input type="text" name="username" placeholder="Name" required>
+            <input type="email" name="email" placeholder="E-mail" required>
+            <input type="password" name="password" placeholder="Password" required>
+            <h5>You already have an account? <span id="span-login">Log in</span></h5>
             <button type="submit" id="creation-acc">Create</button>
         </form>
-        <h5>You already have an account ?<span id="span-login">Log in</span></h5>
+
     </section>
 
     <section class="popular-articles">
@@ -81,8 +139,8 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
             <div class="popular-grid">
                 <div class="popular-article">
                     <div class="details">
-                    <p>The game Awards 2024: all of the biggest trailers and announcements</p>
-                    <img src="images/image 5.svg" class="article-poster">
+                        <p>The game Awards 2024: all of the biggest trailers and announcements</p>
+                        <img src="images/image 5.svg" class="article-poster">
                     </div>
                     <div class="writer">
                         <p>Ahmed</p>
@@ -92,8 +150,8 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 <div class="popular-article">
                     <div class="details">
-                    <p>The game Awards 2024: all of the biggest trailers and announcements</p>
-                    <img src="images/image 5.svg" class="article-poster">
+                        <p>The game Awards 2024: all of the biggest trailers and announcements</p>
+                        <img src="images/image 5.svg" class="article-poster">
                     </div>
                     <div class="writer">
                         <p>Ahmed</p>
@@ -103,8 +161,8 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 <div class="popular-article">
                     <div class="details">
-                    <p>The game Awards 2024: all of the biggest trailers and announcements</p>
-                    <img src="images/image 5.svg" class="article-poster">
+                        <p>The game Awards 2024: all of the biggest trailers and announcements</p>
+                        <img src="images/image 5.svg" class="article-poster">
                     </div>
                     <div class="writer">
                         <p>Ahmed</p>
@@ -118,5 +176,5 @@ $users = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
     <script src="Script.js?v=<?php echo time(); ?>"></script>
 </body>
-</html>
 
+</html>
