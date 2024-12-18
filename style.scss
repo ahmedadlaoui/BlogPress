@@ -316,3 +316,20 @@ header{
 #invis{
     display: block;
 }
+#log-out{
+    background-color: rgb(254, 38, 38);
+    border-radius: 50px;
+    color: white;
+    font-family: playfair display;
+    padding: 16px;
+    border: none;
+    font-weight: 700;
+    transition: 0.5s all;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover{
+        background-color:rgb(183, 43, 30) ;
+    }
+}

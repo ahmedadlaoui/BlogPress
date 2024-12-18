@@ -37,3 +37,4 @@ document.getElementById('vis').addEventListener('click',()=>{
         document.getElementById('invis').style.display = "block"
          document.getElementById('passlog').type = 'password'
 })
+

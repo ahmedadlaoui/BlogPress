@@ -1,4 +1,7 @@
 <?php
+session_start();
+// session_unset();
+// session_destroy();
 $servername = "localhost";
 $username = "root";
 $password = "06database@SM23";
@@ -11,8 +14,6 @@ try {
 } catch (PDOException $e) {
     die("Connection failed: " . $e->getMessage());
 }
-
-session_start();
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password'])) {
@@ -27,10 +28,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':password', $hashedPassword);
             $stmt->execute();
-
         } catch (PDOException $e) {
             echo "Error during signup: " . $e->getMessage();
         }
+    }
+
+    // Login
+    if (isset($_SESSION['user_id'])) {
+        session_unset();
+        session_destroy();
     }
 
     if (isset($_POST['connectionemail']) && isset($_POST['connectionpassword'])) {
@@ -38,29 +44,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $connectionpassword = trim($_POST['connectionpassword']);
 
         try {
-            $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email LIMIT 1");
+            $stmt = $conn->prepare("SELECT * FROM users WHERE email = :email");
             $stmt->bindParam(':email', $connectionemail);
             $stmt->execute();
 
             $user = $stmt->fetch(PDO::FETCH_ASSOC);
 
             if ($user && password_verify($connectionpassword, $user['password'])) {
-
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['email'] = $user['email'];
-
+                $_SESSION['role'] = $user['role'];  
                 header("Location: index.php");
                 exit;
-            } else {
-                echo "Invalid email or password!";
             }
         } catch (PDOException $e) {
             echo "Error during login: " . $e->getMessage();
         }
     }
 }
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
+    session_unset(); // Clear session variables
+    session_destroy(); // Destroy the session
+    header("Location: index.php"); // Redirect to the homepage
+    exit;
+}
 ?>
+
 
 
 
@@ -80,20 +90,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <header>
         <a href="index.php"><img src="images/logoBP.png" alt="" class="logo"></a>
         <ul>
-            <a href="index.php">
-                <li>Home</li>
-            </a>
-            <a href="#">
-                <li>About Us</li>
-            </a>
-            <a href="#">
-                <li>Your articles</li>
-            </a>
-        </ul>
-        <div class="connection-buttons">
-            <button id="login">Log in</button>
-            <button id="signup">Sign Up</button>
-        </div>
+        <a href="index.php">
+            <li>Home</li>
+        </a>
+        <a href="#">
+            <li>About Us</li>
+        </a>
+        
+        <?php
+        if (isset($_SESSION['role']) && $_SESSION['role'] == 'author') {
+            echo '<a href="authordashboard.php"><li>Your articles</li></a>';
+        }
+        ?>
+    </ul>
+    <div class="connection-buttons">
+    <?php
+    if (isset($_SESSION['username'])) {
+        echo '<form method="post">
+            <button type="submit" name="logout" id="log-out">
+                Log out <img src="images/logout_24dp_EFEFEF_FILL1_wght400_GRAD0_opsz24.svg" alt="">
+            </button>
+        </form>';
+    } else {
+        echo '<button id="login">Log in</button>';
+        echo '<button id="signup">Sign Up</button>';
+    }
+    ?>
+</div>
+
     </header>
 
     <section class="loginn">
@@ -101,9 +125,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <h1>Log In</h1>
         </div>
         <form action="index.php" method="POST" id="login">
-            <input type="email" name="email" placeholder="E-mail" required>
+            <input type="email" name="connectionemail" placeholder="E-mail" required>
             <div style="position: relative;width:100%;">
-                <input type="password" name="password" placeholder="Password" required id="passlog">
+                <input type="password" name="connectionpassword" placeholder="Password" required id="passlog">
                 <img src="images/invisiblepassword.svg" alt="" class="togglevis" id="invis">
                 <img src="images/visiblepassword (1).svg" alt="" class="togglevis" id="vis">
             </div>

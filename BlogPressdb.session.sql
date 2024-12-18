@@ -23,6 +23,10 @@ CREATE TABLE IF NOT EXISTS articles (
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
 -- @block
+ALTER TABLE articles
+ADD COLUMN poster VARCHAR(255) DEFAULT NULL;
+
+-- @block
 CREATE TABLE IF NOT EXISTS comments (
     id INT AUTO_INCREMENT PRIMARY KEY,
     article_id INT NOT NULL,
@@ -64,5 +68,7 @@ INSERT INTO articles (title, content, user_id) VALUES
 
 -- @block
 SELECT * FROM users;
-
+-- @block
+INSERT INTO users (username, email, password, role) VALUES ('adil', 'adil@gmail.com', 'adil123', 'author');
+-- @block
 
