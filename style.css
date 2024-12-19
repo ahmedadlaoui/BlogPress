@@ -7,7 +7,7 @@
 
 body {
   min-height: 100vh;
-  background-color: rgb(38, 38, 38);
+  background-color: rgb(246, 246, 246);
 }
 
 .logo {
@@ -16,13 +16,13 @@ body {
 }
 
 header {
+  background-color: #111111;
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-evenly;
   height: 80px;
-  width: 90%;
+  width: 100%;
   margin: auto;
-  border-bottom: 1px solid white;
 }
 header ul {
   width: 50%;
@@ -71,19 +71,17 @@ header .connection-buttons #signup:hover {
 
 .popular-articles {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   height: -moz-max-content;
   height: max-content;
   margin: auto;
   margin-top: 64px;
   width: 90%;
-  -moz-column-gap: 88px;
-       column-gap: 88px;
   row-gap: 88px;
 }
 .popular-articles h1 {
-  color: white;
+  color: #111111;
   font-family: playfair display;
 }
 .popular-articles .hero {
@@ -95,17 +93,18 @@ header .connection-buttons #signup:hover {
   align-items: center;
   text-align: start;
   position: relative;
+  background-color: #eaeaea;
 }
 .popular-articles .hero button {
   border: none;
   background-color: transparent;
-  color: #FFC067;
+  color: #111111;
   font-family: roboto;
-  border-bottom: 1px solid #FFC067;
+  border-bottom: 1px solid #111111;
   cursor: pointer;
   position: absolute;
-  right: 0;
-  bottom: 0;
+  right: 4px;
+  bottom: 4px;
 }
 .popular-articles .side-articles {
   width: -moz-max-content;
@@ -127,30 +126,40 @@ header .connection-buttons #signup:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-  max-width: 320px;
+  max-width: 400px;
+  height: -moz-max-content;
+  height: max-content;
+  background-color: #eaeaea;
 }
 .popular-articles .side-articles .details p {
-  color: white;
+  color: #111111;
   font-family: playfair display;
 }
 .popular-articles .side-articles .details .article-poster {
-  width: 100px;
-  height: 100px;
+  width: 130px;
+  height: 130px;
+  margin-left: 8px;
 }
 .popular-articles .side-articles .popular-article {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  border-bottom: 1px solid white;
+  border-bottom: 1px solid #111111;
+  height: 130px;
+  position: relative;
 }
 .popular-articles .side-articles .popular-article .writer {
+  scale: 0.9;
   display: flex;
   align-items: center;
   width: -moz-max-content;
   width: max-content;
+  position: absolute;
+  bottom: 0;
+  left: 0;
 }
 .popular-articles .side-articles .popular-article .writer p {
-  color: #FFC067;
+  color: #111111;
 }
 
 .overlay {
@@ -353,4 +362,142 @@ header .connection-buttons #signup:hover {
 }
 #log-out:hover {
   background-color: rgb(183, 43, 30);
+}
+
+.wlc {
+  width: -moz-max-content;
+  width: max-content;
+  margin: auto;
+  color: #FFC067;
+  border-bottom: 1px solid #FFC067;
+  margin-top: 8px;
+}
+
+.mainsec {
+  width: 100%;
+  display: flex !important;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 64px;
+}
+.mainsec .side {
+  width: -moz-max-content;
+  width: max-content;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: center;
+  overflow: scroll;
+  overflow-x: hidden;
+  max-height: 450px;
+  row-gap: 4px;
+}
+.mainsec .side::-webkit-scrollbar {
+  display: none;
+}
+.mainsec .details {
+  display: grid;
+  display: flex;
+  width: 400px;
+  transition: 0.5s all ease-in-out;
+  background-color: #eaeaea;
+  position: relative;
+  border-top: 1px solid black;
+}
+.mainsec .details p {
+  color: #111111;
+  font-family: playfair display;
+}
+.mainsec .details .comment {
+  position: absolute;
+  bottom: 4px;
+  right: 48px;
+}
+.mainsec .details .views {
+  position: absolute;
+  bottom: 4px;
+  right: 150px;
+}
+.mainsec .details .article-poster {
+  width: 130px;
+  height: 130px;
+  margin-right: 8px;
+  display: block;
+}
+.mainsec .details:hover {
+  background-color: rgb(199, 199, 170);
+  cursor: pointer;
+}
+.mainsec .popular-article {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  border-bottom: 1px solid #111111;
+  height: 130px;
+  position: relative;
+}
+.mainsec .content-form {
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.mainsec .content-form textarea {
+  width: 100%;
+  resize: none;
+  outline: none;
+  min-height: 200px;
+  background-color: transparent;
+  color: #111111;
+  font-family: roboto;
+  padding: 12px;
+  border: 1px solid gray;
+  border-top: none;
+}
+.mainsec .content-form textarea::-webkit-scrollbar {
+  display: none;
+}
+.mainsec .content-form #title {
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  color: #111111;
+  font-family: roboto !important;
+  padding: 8px;
+  background-color: transparent;
+  width: 100%;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  text-align: center;
+  font-family: playfair display;
+  border: 1px solid gray;
+  border-bottom: none;
+  font-weight: 900;
+}
+.mainsec .content-form #submit-article {
+  background-color: #FFC067;
+  color: black;
+  width: 100%;
+  padding: 8px;
+  border: 1px solid gray;
+  font-family: roboto;
+  border-radius: 8px;
+  margin-top: 4px;
+  cursor: pointer;
+}
+.mainsec .content-form #ilu {
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  color: #111111;
+  font-family: roboto;
+  padding: 8px;
+  background-color: transparent;
+  width: 100%;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  text-align: center;
+  font-family: playfair display;
+  border: 1px solid gray;
+  border-top: none;
 }/*# sourceMappingURL=style.css.map */

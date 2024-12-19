@@ -71,4 +71,6 @@ SELECT * FROM users;
 -- @block
 INSERT INTO users (username, email, password, role) VALUES ('adil', 'adil@gmail.com', 'adil123', 'author');
 -- @block
+SELECT * FROM articles;
+-- @block
 

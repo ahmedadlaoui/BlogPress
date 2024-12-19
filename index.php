@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
         try {
-            $stmt = $conn->prepare("INSERT INTO users (username, email, password, role) VALUES (:username, :email, :password, 'visitor')");
+            $stmt = $conn->prepare("INSERT INTO users (username, email, password, role) VALUES (:username, :email, :password, 'author')");
             $stmt->bindParam(':username', $username);
             $stmt->bindParam(':email', $email);
             $stmt->bindParam(':password', $hashedPassword);
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $_SESSION['user_id'] = $user['id'];
                 $_SESSION['username'] = $user['username'];
                 $_SESSION['email'] = $user['email'];
-                $_SESSION['role'] = $user['role'];  
+                $_SESSION['role'] = $user['role'];
                 header("Location: index.php");
                 exit;
             }
@@ -64,9 +64,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
-    session_unset(); // Clear session variables
-    session_destroy(); // Destroy the session
-    header("Location: index.php"); // Redirect to the homepage
+    session_unset();
+    session_destroy();
+    header("Location: index.php");
     exit;
 }
 ?>
@@ -90,33 +90,33 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
     <header>
         <a href="index.php"><img src="images/logoBP.png" alt="" class="logo"></a>
         <ul>
-        <a href="index.php">
-            <li>Home</li>
-        </a>
-        <a href="#">
-            <li>About Us</li>
-        </a>
-        
-        <?php
-        if (isset($_SESSION['role']) && $_SESSION['role'] == 'author') {
-            echo '<a href="authordashboard.php"><li>Your articles</li></a>';
-        }
-        ?>
-    </ul>
-    <div class="connection-buttons">
-    <?php
-    if (isset($_SESSION['username'])) {
-        echo '<form method="post">
+            <a href="index.php">
+                <li>Home</li>
+            </a>
+            <a href="#">
+                <li>About Us</li>
+            </a>
+
+            <?php
+            if (isset($_SESSION['role']) && $_SESSION['role'] == 'author') {
+                echo '<a href="authordashboard.php"><li>Your articles</li></a>';
+            }
+            ?>
+        </ul>
+        <div class="connection-buttons">
+            <?php
+            if (isset($_SESSION['username'])) {
+                echo '<form method="post">
             <button type="submit" name="logout" id="log-out">
                 Log out <img src="images/logout_24dp_EFEFEF_FILL1_wght400_GRAD0_opsz24.svg" alt="">
             </button>
         </form>';
-    } else {
-        echo '<button id="login">Log in</button>';
-        echo '<button id="signup">Sign Up</button>';
-    }
-    ?>
-</div>
+            } else {
+                echo '<button id="login">Log in</button>';
+                echo '<button id="signup">Sign Up</button>';
+            }
+            ?>
+        </div>
 
     </header>
 
@@ -150,7 +150,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
         </form>
 
     </section>
+    <div>
+        <?php
 
+
+        if (isset($_SESSION['username'])) {
+            echo '<h1 class="wlc">Welcome, ' . htmlspecialchars($_SESSION['username']) . '!</h1>';
+        } else {
+            echo '<h1 class="wlc">Welcome, Guest!</h1>';
+        }
+        ?>
+    </div>
     <section class="popular-articles">
         <div class="hero">
             <img src="images/image 5.svg" alt="">
@@ -159,7 +169,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
         </div>
 
         <div class="side-articles">
-            <H1 style="font-family: roboto;margin-bottom:24px;border-bottom:1px solid white;margin-right:50%;">Top articles :</H1>
+            <H1 style="font-family: roboto;margin-bottom:24px;border-bottom:1px solid #111111;margin-right:50%;">Top articles :</H1>
             <div class="popular-grid">
                 <div class="popular-article">
                     <div class="details">
@@ -168,7 +178,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
                     </div>
                     <div class="writer">
                         <p>Ahmed</p>
-                        <img src="images/history_edu_24dp_FFC067_FILL1_wght400_GRAD0_opsz24.svg">
+                        <img src="images/wr.svg">
                     </div>
                 </div>
 
@@ -179,7 +189,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
                     </div>
                     <div class="writer">
                         <p>Ahmed</p>
-                        <img src="images/history_edu_24dp_FFC067_FILL1_wght400_GRAD0_opsz24.svg">
+                        <img src="images/wr.svg">
                     </div>
                 </div>
 
@@ -190,7 +200,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
                     </div>
                     <div class="writer">
                         <p>Ahmed</p>
-                        <img src="images/history_edu_24dp_FFC067_FILL1_wght400_GRAD0_opsz24.svg">
+                        <img src="images/wr.svg">
                     </div>
                 </div>
             </div>
