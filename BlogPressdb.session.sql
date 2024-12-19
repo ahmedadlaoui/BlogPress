@@ -71,6 +71,11 @@ SELECT * FROM users;
 -- @block
 INSERT INTO users (username, email, password, role) VALUES ('adil', 'adil@gmail.com', 'adil123', 'author');
 -- @block
-SELECT * FROM articles;
+DELETE FROM articles
+ORDER BY created_at ASC
+LIMIT 1;
 -- @block
+DESCRIBE articles;
+-- @block
+ALTER TABLE articles ADD COLUMN username VARCHAR(255);
 

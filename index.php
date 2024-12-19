@@ -69,6 +69,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
     header("Location: index.php");
     exit;
 }
+
+
+
+$query = "SELECT * FROM articles ORDER BY views DESC LIMIT 4";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+$top_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$query = "SELECT * FROM articles ORDER BY views DESC LIMIT 1";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+$top_article = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
 ?>
 
 
@@ -151,7 +165,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
 
     </section>
     <div>
-        <?php
+        <!-- <?php
 
 
         if (isset($_SESSION['username'])) {
@@ -160,52 +174,43 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
             echo '<h1 class="wlc">Welcome, Guest!</h1>';
         }
         ?>
-    </div>
+    </div> -->
     <section class="popular-articles">
         <div class="hero">
-            <img src="images/image 5.svg" alt="">
-            <h1>The game Awards 2024: all of the biggest trailers and announcements</h1>
-            <a href="Article.php" target="_blank"><button>Read more...</button></a>
+            <img src="<?php echo htmlspecialchars($top_article['poster']); ?>" alt="" class="homeposter1">
+            <h1><?php echo htmlspecialchars($top_article['title']); ?></h1>
+            <a href="Article.php?id=<?php echo $top_article['id']; ?>" target="_blank"><button>Read more...</button></a>
         </div>
 
         <div class="side-articles">
-            <H1 style="font-family: roboto;margin-bottom:24px;border-bottom:1px solid #111111;margin-right:50%;">Top articles :</H1>
+            <h1 style="font-family: roboto; margin-bottom: 24px; border-bottom: 1px solid #111111;">Top articles:</h1>
             <div class="popular-grid">
-                <div class="popular-article">
+                <?php
+                foreach ($top_articles as $article) {
+                    echo '<div class="popular-article">
                     <div class="details">
-                        <p>The game Awards 2024: all of the biggest trailers and announcements</p>
-                        <img src="images/image 5.svg" class="article-poster">
+                        <p>' . htmlspecialchars($article['title']) . '</p>
+                        <img src="' . htmlspecialchars($article['poster']) . '" class="article-poster">
                     </div>
                     <div class="writer">
-                        <p>Ahmed</p>
-                        <img src="images/wr.svg">
+                        <button class="c">Read more...</button>
                     </div>
-                </div>
-
-                <div class="popular-article">
-                    <div class="details">
-                        <p>The game Awards 2024: all of the biggest trailers and announcements</p>
-                        <img src="images/image 5.svg" class="article-poster">
-                    </div>
-                    <div class="writer">
-                        <p>Ahmed</p>
-                        <img src="images/wr.svg">
-                    </div>
-                </div>
-
-                <div class="popular-article">
-                    <div class="details">
-                        <p>The game Awards 2024: all of the biggest trailers and announcements</p>
-                        <img src="images/image 5.svg" class="article-poster">
-                    </div>
-                    <div class="writer">
-                        <p>Ahmed</p>
-                        <img src="images/wr.svg">
-                    </div>
-                </div>
+                </div>';
+                }
+                ?>
             </div>
         </div>
 
+    </section>
+    <section class="total">
+                <div class="the-article">
+                    <div>
+                    <h1>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque!</h1>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci quia sunt unde mollitia magnam distinctio, vel saepe dicta praesentium impedit voluptatem, qui voluptatum ad totam tempore! Tempore recusandae veritatis saepe!</p>
+                    <button>Read more...</button>
+                    </div>
+                    <img src="images/image 5.svg" alt="">
+                </div>
     </section>
 
     <script src="Script.js?v=<?php echo time(); ?>"></script>

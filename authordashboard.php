@@ -26,17 +26,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-article'])) {
     $content = trim($_POST['content']);
     $illustration = trim($_POST['illustration']);
     $author_id = $_SESSION['user_id'];
+    $author_username = $_SESSION['username'];
 
     if (!empty($title) && !empty($content) && !empty($illustration)) {
         try {
             $stmt = $conn->prepare("
-                INSERT INTO articles (title, content, poster, user_id) 
-                VALUES (:title, :content, :poster, :user_id)
+                INSERT INTO articles (title, content, poster, user_id,username) 
+                VALUES (:title, :content, :poster, :user_id, :username)
             ");
             $stmt->bindParam(':title', $title);
             $stmt->bindParam(':content', $content);
             $stmt->bindParam(':poster', $illustration);
             $stmt->bindParam(':user_id', $author_id);
+            $stmt->bindParam(':username', $author_username);
             $stmt->execute();
             header("Location: authordashboard.php?success=1");
             exit;
@@ -149,11 +151,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-article'])) {
                         <img src="<?= htmlspecialchars($article['poster']) ?>" class="article-poster" alt="Article Poster">
                         <p><?= htmlspecialchars($article['title']) ?></p>
                         <div class="comment" style="display: flex;align-items:center;column-gap:4px;">
-                            <img src="images/comment.svg" alt="Comments Icon">
+                            <img src="images/newcomment.svg" alt="Comments Icon">
                             <?= htmlspecialchars($article['comment_count']) ?>
                         </div>
                         <div class="views" style="display: flex;align-items:center;column-gap:4px;">
-                            <img src="images/view.svg" alt="Views Icon">
+                            <img src="images/NEwview.svg" alt="Views Icon">
                             <?= htmlspecialchars($article['views']) ?>
                         </div>
                     </div>
@@ -166,8 +168,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-article'])) {
         </div>
 
         <form class="content-form" method="POST">
-            <input type="text" name="title" id="title" placeholder="Title" required>
-            <textarea name="content" id="content" placeholder="Content..." required></textarea>
+            <h1 style="margin-bottom: 24px;font-family:roboto;border-bottom:1px solid white;width:100%;">Add new article :</h1>
+            <input type="text" name="title" id="title" placeholder="Title :" required>
+            <textarea name="content" id="content" placeholder="Content :" required></textarea>
             <input type="text" name="illustration" id="ilu" placeholder="Add illustration here (URL)...">
             <button type="submit" id="submit-article" name="submit-article">Submit</button>
         </form>

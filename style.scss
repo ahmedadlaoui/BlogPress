@@ -7,7 +7,7 @@
 }
 body{
     min-height: 100vh;
-    background-color: rgb(246, 246, 246);
+    background-color: #111111;
 }
 .logo{
     width: 100px;
@@ -17,6 +17,7 @@ header{
     background-color: #111111;
     display: flex;
     align-items: center;
+    border-bottom: 1px solid white;
     justify-content: space-evenly;
     height: 80px;
     width: 100%;
@@ -75,10 +76,14 @@ header{
     width: 90%;
     row-gap: 88px;
     h1{
-        color: #111111;
+        width: 100%;
+        color: white;
         font-family: playfair display;
     }
     .hero{
+        cursor: pointer;
+        padding: 4px;
+        border-radius: 12px;
         width: min-content;
         display: flex;
         flex-direction: column;
@@ -86,17 +91,21 @@ header{
         align-items: center;
         text-align: start;
         position: relative;
-        background-color: #eaeaea;
+        // background-color: #eaeaea;
         button{
             border: none;
             background-color: transparent;
-            color: #111111;
+            color: #FFC067  ;
             font-family: roboto;
-            border-bottom: 1px solid #111111;
+            border-bottom: 1px solid #FFC067;
             cursor: pointer;
             position: absolute;
-            right: 4px;
+            right: 8px;
             bottom: 4px;
+        }h1{
+            margin-top: 18px;
+            margin-bottom: 18px;
+            font-family: playfair display;
         }
     }
 
@@ -115,28 +124,35 @@ header{
         }
         .details{
             display: flex;
-            justify-content: center;
-            align-items: center;
-            max-width: 400px;
-
+            width: 400px;
+            justify-content: space-between;
             height: max-content;
-            background-color: #eaeaea;
+            align-items: start;
+            background-color: #111111;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+            border-bottom: 1px solid white;
+            cursor: pointer;
             p{
-                color: #111111;
+                color: white;
+                margin-top: 8px;
+                margin-left: 10px;
                 font-family: playfair display;
             }
             .article-poster{
-                width: 130px;
-                height: 130px;
+                width: 100px;
+                height: 100px;
                 margin-left: 8px;
+                border-top-right-radius: 8px;
             }
         }
         .popular-article{
+            margin-bottom: 8px;
             display: flex;
             justify-content: center;
             flex-direction: column;
             border-bottom: 1px solid #111111;
-            height:130px;
+            height:max-content;
             position: relative;
             .writer{
                 scale: 0.9;
@@ -326,7 +342,7 @@ header{
     display: block;
 }
 #log-out{
-    background-color: rgb(254, 38, 38);
+    background-color: #daa458;
     border-radius: 50px;
     color: white;
     font-family: playfair display;
@@ -338,9 +354,6 @@ header{
     display: flex;
     justify-content: center;
     align-items: center;
-    &:hover{
-        background-color:rgb(183, 43, 30) ;
-    }
 }
 .wlc{
     width: max-content;
@@ -365,6 +378,8 @@ header{
         overflow-x: hidden;
         max-height: 450px;
         row-gap: 4px;
+        background-color: #262626;
+        padding: 12px;
         &::-webkit-scrollbar{
             display: none;
         }
@@ -374,40 +389,39 @@ header{
         display: flex;
         width: 400px;
         transition: 0.5s all ease-in-out;
-        background-color: #eaeaea;
+        background-color: #111111;
+        border-bottom: 1px solid white;
         position: relative;
-        border-top: 1px solid black;
-
+        border-radius: 8px;
         p{
-            color: #111111;
+            color: white;
             font-family: playfair display;
         }
         .comment{
             position: absolute;
             bottom: 4px;
             right: 48px;
+            color: white;
         }
         .views{
             position: absolute;
             bottom: 4px;
             right: 150px;
+            color: white;
         }
         .article-poster{
             width: 130px;
-            height: 130px;
+            height: 130px; 
             margin-right: 8px;
             display: block;
-        }
-        &:hover{
-            background-color:rgb(199, 199, 170);
-            cursor: pointer;
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
         }
     }
     .popular-article{
         display: flex;
         justify-content: center;
         flex-direction: column;
-        border-bottom: 1px solid #111111;
         height:130px;
         position: relative;
     }
@@ -417,24 +431,27 @@ header{
         justify-content: center;
         align-items: center;
         flex-direction: column;
+        border-radius: 8px;
+        padding: 8px;
+        background-color: transparent;
+        color: white;
         textarea{
             width: 100%;
             resize: none;
             outline: none;
-            min-height: 200px;
+            min-height: 300px;
             background-color: transparent;
-            color: #111111;
+            color: white;
             font-family: roboto;
             padding: 12px;
-            border: 1px solid gray;
-            border-top: none;
+            border: none;
             &::-webkit-scrollbar{
                 display: none;
             }
         }#title{
             border-top-left-radius: 8px;
             border-top-right-radius: 8px;
-            color: #111111;
+            color: white;
             font-family: roboto!important;
             padding: 8px;
             background-color: transparent;
@@ -442,11 +459,9 @@ header{
             outline: none;
             border: none;
             font-size: 16px;
-            text-align: center;
             font-family: playfair display;
-            border: 1px solid gray;
-            border-bottom: none;
-            font-weight: 900;
+            // border: 1px solid gray;
+            font-weight: 600;
         }
         #submit-article{
             background-color: #FFC067;
@@ -462,8 +477,9 @@ header{
         #ilu{
             border-bottom-left-radius: 8px;
             border-bottom-right-radius: 8px;
-            color: #111111;
+            color: white;
             font-family: roboto;
+            border: none;
             padding: 8px;
             background-color: transparent;
             width: 100%;
@@ -472,9 +488,76 @@ header{
             font-size: 16px;
             text-align: center;
             font-family: playfair display;
-            border: 1px solid gray;
+            // border: 1px solid gray;
             border-top: none;
         }
         
     }
 }
+.homeposter1{
+    max-width: 600px;
+    min-height: 500px;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    box-shadow: 1px 1px 10px #FFC067;
+}
+.c{
+    border: none;
+    background-color: transparent;
+    color: #FFC067  ;
+    font-family: roboto;
+    border-bottom: 1px solid #FFC067;
+    cursor: pointer;
+    position: absolute;
+    right: 8px;
+    bottom: 4px;
+    width: max-content;
+    position: absolute;
+    bottom: 8px;
+    left: 10px;
+}
+.total{
+    height: 100vh;
+    width: 100%;
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    column-gap: 30px;
+    align-items: center;
+    .the-article{
+        width: 70%;
+        display: flex;
+        height: min-content;
+        justify-content: center;
+        align-items: start;
+        overflow: hidden;
+        column-gap: 4%;
+        position: relative;
+        border-bottom: 1px solid rgb(79, 79, 79);
+        h1{
+            color: #FFC067;
+            border-bottom: 1px solid #FFC067;
+        }
+        p{
+            margin-top: 12px;
+            color: white;
+            font-family: playfair display;
+        }
+        img{
+           max-width: 350px;
+           border-radius: 4px;
+        }
+        button{
+            border: none;
+            background-color: transparent;
+            color: #FFC067  ;
+            font-family: roboto;
+            border-bottom: 1px solid #FFC067;
+            cursor: pointer;
+            width: max-content;
+            margin-top: 12px    ;
+        }
+
+    }
+}
+

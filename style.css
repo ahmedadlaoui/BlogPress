@@ -7,7 +7,7 @@
 
 body {
   min-height: 100vh;
-  background-color: rgb(246, 246, 246);
+  background-color: #111111;
 }
 
 .logo {
@@ -19,6 +19,7 @@ header {
   background-color: #111111;
   display: flex;
   align-items: center;
+  border-bottom: 1px solid white;
   justify-content: space-evenly;
   height: 80px;
   width: 100%;
@@ -81,10 +82,14 @@ header .connection-buttons #signup:hover {
   row-gap: 88px;
 }
 .popular-articles h1 {
-  color: #111111;
+  width: 100%;
+  color: white;
   font-family: playfair display;
 }
 .popular-articles .hero {
+  cursor: pointer;
+  padding: 4px;
+  border-radius: 12px;
   width: -moz-min-content;
   width: min-content;
   display: flex;
@@ -93,18 +98,22 @@ header .connection-buttons #signup:hover {
   align-items: center;
   text-align: start;
   position: relative;
-  background-color: #eaeaea;
 }
 .popular-articles .hero button {
   border: none;
   background-color: transparent;
-  color: #111111;
+  color: #FFC067;
   font-family: roboto;
-  border-bottom: 1px solid #111111;
+  border-bottom: 1px solid #FFC067;
   cursor: pointer;
   position: absolute;
-  right: 4px;
+  right: 8px;
   bottom: 4px;
+}
+.popular-articles .hero h1 {
+  margin-top: 18px;
+  margin-bottom: 18px;
+  font-family: playfair display;
 }
 .popular-articles .side-articles {
   width: -moz-max-content;
@@ -124,28 +133,37 @@ header .connection-buttons #signup:hover {
 }
 .popular-articles .side-articles .details {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  max-width: 400px;
+  width: 400px;
+  justify-content: space-between;
   height: -moz-max-content;
   height: max-content;
-  background-color: #eaeaea;
+  align-items: start;
+  background-color: #111111;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom: 1px solid white;
+  cursor: pointer;
 }
 .popular-articles .side-articles .details p {
-  color: #111111;
+  color: white;
+  margin-top: 8px;
+  margin-left: 10px;
   font-family: playfair display;
 }
 .popular-articles .side-articles .details .article-poster {
-  width: 130px;
-  height: 130px;
+  width: 100px;
+  height: 100px;
   margin-left: 8px;
+  border-top-right-radius: 8px;
 }
 .popular-articles .side-articles .popular-article {
+  margin-bottom: 8px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   border-bottom: 1px solid #111111;
-  height: 130px;
+  height: -moz-max-content;
+  height: max-content;
   position: relative;
 }
 .popular-articles .side-articles .popular-article .writer {
@@ -347,7 +365,7 @@ header .connection-buttons #signup:hover {
 }
 
 #log-out {
-  background-color: rgb(254, 38, 38);
+  background-color: #daa458;
   border-radius: 50px;
   color: white;
   font-family: playfair display;
@@ -359,9 +377,6 @@ header .connection-buttons #signup:hover {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-#log-out:hover {
-  background-color: rgb(183, 43, 30);
 }
 
 .wlc {
@@ -390,6 +405,8 @@ header .connection-buttons #signup:hover {
   overflow-x: hidden;
   max-height: 450px;
   row-gap: 4px;
+  background-color: #262626;
+  padding: 12px;
 }
 .mainsec .side::-webkit-scrollbar {
   display: none;
@@ -399,39 +416,39 @@ header .connection-buttons #signup:hover {
   display: flex;
   width: 400px;
   transition: 0.5s all ease-in-out;
-  background-color: #eaeaea;
+  background-color: #111111;
+  border-bottom: 1px solid white;
   position: relative;
-  border-top: 1px solid black;
+  border-radius: 8px;
 }
 .mainsec .details p {
-  color: #111111;
+  color: white;
   font-family: playfair display;
 }
 .mainsec .details .comment {
   position: absolute;
   bottom: 4px;
   right: 48px;
+  color: white;
 }
 .mainsec .details .views {
   position: absolute;
   bottom: 4px;
   right: 150px;
+  color: white;
 }
 .mainsec .details .article-poster {
   width: 130px;
   height: 130px;
   margin-right: 8px;
   display: block;
-}
-.mainsec .details:hover {
-  background-color: rgb(199, 199, 170);
-  cursor: pointer;
+  border-top-left-radius: 8px;
+  border-bottom-left-radius: 8px;
 }
 .mainsec .popular-article {
   display: flex;
   justify-content: center;
   flex-direction: column;
-  border-bottom: 1px solid #111111;
   height: 130px;
   position: relative;
 }
@@ -441,18 +458,21 @@ header .connection-buttons #signup:hover {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  border-radius: 8px;
+  padding: 8px;
+  background-color: transparent;
+  color: white;
 }
 .mainsec .content-form textarea {
   width: 100%;
   resize: none;
   outline: none;
-  min-height: 200px;
+  min-height: 300px;
   background-color: transparent;
-  color: #111111;
+  color: white;
   font-family: roboto;
   padding: 12px;
-  border: 1px solid gray;
-  border-top: none;
+  border: none;
 }
 .mainsec .content-form textarea::-webkit-scrollbar {
   display: none;
@@ -460,7 +480,7 @@ header .connection-buttons #signup:hover {
 .mainsec .content-form #title {
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  color: #111111;
+  color: white;
   font-family: roboto !important;
   padding: 8px;
   background-color: transparent;
@@ -468,11 +488,8 @@ header .connection-buttons #signup:hover {
   outline: none;
   border: none;
   font-size: 16px;
-  text-align: center;
   font-family: playfair display;
-  border: 1px solid gray;
-  border-bottom: none;
-  font-weight: 900;
+  font-weight: 600;
 }
 .mainsec .content-form #submit-article {
   background-color: #FFC067;
@@ -488,8 +505,9 @@ header .connection-buttons #signup:hover {
 .mainsec .content-form #ilu {
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
-  color: #111111;
+  color: white;
   font-family: roboto;
+  border: none;
   padding: 8px;
   background-color: transparent;
   width: 100%;
@@ -498,6 +516,78 @@ header .connection-buttons #signup:hover {
   font-size: 16px;
   text-align: center;
   font-family: playfair display;
-  border: 1px solid gray;
   border-top: none;
+}
+
+.homeposter1 {
+  max-width: 600px;
+  min-height: 500px;
+  border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+  box-shadow: 1px 1px 10px #FFC067;
+}
+
+.c {
+  border: none;
+  background-color: transparent;
+  color: #FFC067;
+  font-family: roboto;
+  border-bottom: 1px solid #FFC067;
+  cursor: pointer;
+  position: absolute;
+  right: 8px;
+  bottom: 4px;
+  width: -moz-max-content;
+  width: max-content;
+  position: absolute;
+  bottom: 8px;
+  left: 10px;
+}
+
+.total {
+  height: 100vh;
+  width: 100%;
+  margin-top: 80px;
+  display: flex;
+  flex-direction: column;
+  -moz-column-gap: 30px;
+       column-gap: 30px;
+  align-items: center;
+}
+.total .the-article {
+  width: 70%;
+  display: flex;
+  height: -moz-min-content;
+  height: min-content;
+  justify-content: center;
+  align-items: start;
+  overflow: hidden;
+  -moz-column-gap: 4%;
+       column-gap: 4%;
+  position: relative;
+  border-bottom: 1px solid rgb(79, 79, 79);
+}
+.total .the-article h1 {
+  color: #FFC067;
+  border-bottom: 1px solid #FFC067;
+}
+.total .the-article p {
+  margin-top: 12px;
+  color: white;
+  font-family: playfair display;
+}
+.total .the-article img {
+  max-width: 350px;
+  border-radius: 4px;
+}
+.total .the-article button {
+  border: none;
+  background-color: transparent;
+  color: #FFC067;
+  font-family: roboto;
+  border-bottom: 1px solid #FFC067;
+  cursor: pointer;
+  width: -moz-max-content;
+  width: max-content;
+  margin-top: 12px;
 }/*# sourceMappingURL=style.css.map */
