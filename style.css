@@ -556,6 +556,7 @@ header .connection-buttons #signup:hover {
 }
 .total .the-article {
   width: 70%;
+  margin-top: 32px;
   display: flex;
   height: -moz-min-content;
   height: min-content;
@@ -578,6 +579,7 @@ header .connection-buttons #signup:hover {
 }
 .total .the-article img {
   max-width: 350px;
+  height: 233px;
   border-radius: 4px;
 }
 .total .the-article button {
@@ -617,4 +619,11 @@ header .connection-buttons #signup:hover {
   width: 550px;
   box-shadow: 1px 1px 10px #FFC067;
   border-radius: 8px;
+}
+.whole-article .date {
+  font-family: roboto;
+  color: #FFC067;
+  margin-bottom: 12px;
+  width: 550px;
+  text-align: start;
 }/*# sourceMappingURL=style.css.map */

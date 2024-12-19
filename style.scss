@@ -526,6 +526,7 @@ header{
     align-items: center;
     .the-article{
         width: 70%;
+        margin-top: 32px;
         display: flex;
         height: min-content;
         justify-content: center;
@@ -545,6 +546,7 @@ header{
         }
         img{
            max-width: 350px;
+           height: 233px;
            border-radius: 4px;
         }
         button{
@@ -585,5 +587,13 @@ header{
         box-shadow: 1px 1px 10px #FFC067;
         border-radius: 8px;
     }
+    .date{
+        font-family: roboto;
+        color: #FFC067;
+        margin-bottom: 12px;
+        width: 550px;
+        text-align: start;
+    }
 }
+
 

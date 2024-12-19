@@ -33,14 +33,16 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css?v=<?php echo time(); ?>">
 </head>
+
 <body>
-<div class="overlay"></div>
+    <div class="overlay"></div>
     <header>
         <a href="index.php"><img src="images/logoBP.png" alt="" class="logo"></a>
         <ul>
@@ -116,6 +118,14 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         ?>
     </div>
     <section class="whole-article">
+        
+        <?php
+        $created_at = $article['created_at'];
+        $created_date = new DateTime($created_at);
+        $formatted_date = $created_date->format('Y-m-d');
+        echo '<p class="date">' . htmlspecialchars($formatted_date) . '</p>';
+        ?>
+
         <img src="<?php echo htmlspecialchars($article['poster']); ?>" alt="">
         <h1><?php echo htmlspecialchars($article['title']); ?></h1>
         <p><?php echo nl2br(htmlspecialchars($article['content'])); ?></p>
@@ -127,4 +137,5 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         <P>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur ipsa reiciendis voluptatem delectus temporibus eligendi esse culpa facere a architecto nesciunt deserunt voluptatum aspernatur aut, perferendis aliquid recusandae? Quibusdam perspiciatis, veritatis aspernatur nulla ratione consectetur saepe possimus fugiat ut itaque? In itaque corporis perferendis nam dolorem mollitia vel laudantium eaque natus officia possimus tenetur consequuntur nulla adipisci quisquam voluptatum, consequatur fugiat hic? Excepturi in veniam, quo consequuntur deleniti ducimus, saepe tempore ex sunt labore provident neque culpa nisi officia voluptatum consectetur magni impedit delectus sed. Blanditiis numquam quis quos suscipit debitis sed minus reiciendis architecto. Sint non animi eos voluptate.</P>
     </section> -->
 </body>
+
 </html>
