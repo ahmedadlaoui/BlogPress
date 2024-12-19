@@ -94,7 +94,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-article'])) {
         </div>
 
     </header>
+    <div>
+        <?php
 
+
+        if (isset($_SESSION['username'])) {
+            echo '<h1 class="wlc">Welcome, ' . htmlspecialchars($_SESSION['username']) . '!</h1>';
+        } else {
+            echo '<h1 class="wlc">Welcome, Guest!</h1>';
+        }
+        ?>
+    </div>
     <section class="loginn">
         <div class="welcomemsg">
             <h1>Log In</h1>

@@ -82,7 +82,10 @@ $stmt = $conn->prepare($query);
 $stmt->execute();
 $top_article = $stmt->fetch(PDO::FETCH_ASSOC);
 
-
+$query = "SELECT * FROM articles ORDER BY views DESC LIMIT 4, 18446744073709551615";
+$stmt = $conn->prepare($query);
+$stmt->execute();
+$remaining_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 ?>
 
 
@@ -131,7 +134,6 @@ $top_article = $stmt->fetch(PDO::FETCH_ASSOC);
             }
             ?>
         </div>
-
     </header>
 
     <section class="loginn">
@@ -148,7 +150,6 @@ $top_article = $stmt->fetch(PDO::FETCH_ASSOC);
             <h5>You don't have an account ?<span id="span-register">Register here</span></h5>
             <button type="submit">Log In</button>
         </form>
-
     </section>
 
     <section class="signupp">
@@ -162,24 +163,13 @@ $top_article = $stmt->fetch(PDO::FETCH_ASSOC);
             <h5>You already have an account? <span id="span-login">Log in</span></h5>
             <button type="submit" id="creation-acc">Create</button>
         </form>
-
     </section>
-    <div>
-        <!-- <?php
 
-
-        if (isset($_SESSION['username'])) {
-            echo '<h1 class="wlc">Welcome, ' . htmlspecialchars($_SESSION['username']) . '!</h1>';
-        } else {
-            echo '<h1 class="wlc">Welcome, Guest!</h1>';
-        }
-        ?>
-    </div> -->
     <section class="popular-articles">
         <div class="hero">
             <img src="<?php echo htmlspecialchars($top_article['poster']); ?>" alt="" class="homeposter1">
             <h1><?php echo htmlspecialchars($top_article['title']); ?></h1>
-            <a href="Article.php?id=<?php echo $top_article['id']; ?>" target="_blank"><button>Read more...</button></a>
+            <a href="Article.php?id=<?php echo $top_article['id']; ?>"><button>Read more...</button></a>
         </div>
 
         <div class="side-articles">
@@ -193,24 +183,26 @@ $top_article = $stmt->fetch(PDO::FETCH_ASSOC);
                         <img src="' . htmlspecialchars($article['poster']) . '" class="article-poster">
                     </div>
                     <div class="writer">
-                        <button class="c">Read more...</button>
+                        <a href="Article.php?id=' . $article['id'] . '"><button class="c">Read more...</button></a>
                     </div>
                 </div>';
                 }
                 ?>
             </div>
         </div>
-
     </section>
+
     <section class="total">
-                <div class="the-article">
-                    <div>
-                    <h1>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eaque!</h1>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci quia sunt unde mollitia magnam distinctio, vel saepe dicta praesentium impedit voluptatem, qui voluptatum ad totam tempore! Tempore recusandae veritatis saepe!</p>
-                    <button>Read more...</button>
-                    </div>
-                    <img src="images/image 5.svg" alt="">
+        <?php foreach ($remaining_articles as $article): ?>
+            <div class="the-article">
+                <div>
+                    <h1><?php echo htmlspecialchars($article['title']); ?></h1>
+                    <p><?php echo htmlspecialchars(substr($article['content'], 0, 150)) . ' ...'; ?></p>
+                    <a href="Article.php?id=<?php echo $article['id']; ?>"><button>Read more...</button></a>
                 </div>
+                <img src="<?php echo htmlspecialchars($article['poster']); ?>" alt="">
+            </div>
+        <?php endforeach; ?>
     </section>
 
     <script src="Script.js?v=<?php echo time(); ?>"></script>

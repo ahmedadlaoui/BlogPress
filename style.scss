@@ -560,4 +560,30 @@ header{
 
     }
 }
+.whole-article{
+
+    width:min-content;
+    margin: auto;
+    margin-top: 50px;
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    h1{
+        margin-top: 16px;
+        color: white;
+        font-family: playfair display;
+    }
+    p{
+        margin-top: 16px;
+        color: white;
+        font-family: playfair display;
+    }
+    img{
+        width: 550px;
+        box-shadow: 1px 1px 10px #FFC067;
+        border-radius: 8px;
+    }
+}
 

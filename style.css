@@ -590,4 +590,31 @@ header .connection-buttons #signup:hover {
   width: -moz-max-content;
   width: max-content;
   margin-top: 12px;
+}
+
+.whole-article {
+  width: -moz-min-content;
+  width: min-content;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.whole-article h1 {
+  margin-top: 16px;
+  color: white;
+  font-family: playfair display;
+}
+.whole-article p {
+  margin-top: 16px;
+  color: white;
+  font-family: playfair display;
+}
+.whole-article img {
+  width: 550px;
+  box-shadow: 1px 1px 10px #FFC067;
+  border-radius: 8px;
 }/*# sourceMappingURL=style.css.map */
