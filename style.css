@@ -392,6 +392,7 @@ header .connection-buttons #signup:hover {
   width: 100%;
   display: flex !important;
   justify-content: space-around;
+  flex-direction: column;
   align-items: center;
   margin-top: 64px;
 }
@@ -403,23 +404,25 @@ header .connection-buttons #signup:hover {
   justify-content: center;
   overflow: scroll;
   overflow-x: hidden;
-  max-height: 450px;
-  row-gap: 4px;
-  background-color: #262626;
+  height: 500px;
+  border: 1px solid gray;
+  width: 60%;
+  row-gap: 12px;
   padding: 12px;
 }
 .mainsec .side::-webkit-scrollbar {
   display: none;
 }
 .mainsec .details {
-  display: grid;
   display: flex;
-  width: 400px;
-  transition: 0.5s all ease-in-out;
-  background-color: #111111;
+  width: 100%;
+  transition: 0.3s all ease-in-out;
   border-bottom: 1px solid white;
   position: relative;
-  border-radius: 8px;
+}
+.mainsec .details:hover {
+  cursor: pointer;
+  background-color: #262626;
 }
 .mainsec .details p {
   color: white;
@@ -442,8 +445,7 @@ header .connection-buttons #signup:hover {
   height: 130px;
   margin-right: 8px;
   display: block;
-  border-top-left-radius: 8px;
-  border-bottom-left-radius: 8px;
+  border-top-left-radius: 2px;
 }
 .mainsec .popular-article {
   display: flex;
@@ -453,7 +455,8 @@ header .connection-buttons #signup:hover {
   position: relative;
 }
 .mainsec .content-form {
-  width: 40%;
+  margin-top: 50px;
+  width: 60%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -626,4 +629,47 @@ header .connection-buttons #signup:hover {
   margin-bottom: 12px;
   width: 550px;
   text-align: start;
+}
+.whole-article .like-div {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  -moz-column-gap: 4px;
+       column-gap: 4px;
+  color: white;
+  font-family: roboto;
+}
+.whole-article .like-div svg {
+  cursor: pointer;
+  transition: 0.3s all;
+}
+
+main {
+  width: 100%;
+  display: flex;
+  margin: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+  -moz-column-gap: 10%;
+       column-gap: 10%;
+  justify-content: center;
+}
+
+#ya {
+  width: 60%;
+  margin: auto;
+  color: #FFC067;
+  text-align: start;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #FFC067;
+}
+
+#stc {
+  width: 100%;
+  margin: auto;
+  color: #FFC067;
+  text-align: start;
+  margin-bottom: 8px;
+  border-bottom: 1px solid #FFC067;
 }/*# sourceMappingURL=style.css.map */

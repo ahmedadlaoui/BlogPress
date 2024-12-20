@@ -116,7 +116,7 @@ $remaining_articles = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
             <?php
             if (isset($_SESSION['role']) && $_SESSION['role'] == 'author') {
-                echo '<a href="authordashboard.php"><li>Your articles</li></a>';
+                echo '<a href="authordashboard.php"><li>Dashboard</li></a>';
             }
             ?>
         </ul>

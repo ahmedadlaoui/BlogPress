@@ -37,4 +37,7 @@ document.getElementById('vis').addEventListener('click',()=>{
         document.getElementById('invis').style.display = "block"
          document.getElementById('passlog').type = 'password'
 })
+document.getElementById('like-icon').addEventListener('click',()=>{
+    document.getElementById('like-icon').style.fill = "red"
+})
 

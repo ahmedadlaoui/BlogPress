@@ -55,7 +55,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
             <?php
             if (isset($_SESSION['role']) && $_SESSION['role'] == 'author') {
-                echo '<a href="authordashboard.php"><li>Your articles</li></a>';
+                echo '<a href="authordashboard.php"><li>Dashboard</li></a>';
             }
             ?>
         </ul>
@@ -118,7 +118,6 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         ?>
     </div>
     <section class="whole-article">
-        
         <?php
         $created_at = $article['created_at'];
         $created_date = new DateTime($created_at);
@@ -129,6 +128,10 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         <img src="<?php echo htmlspecialchars($article['poster']); ?>" alt="">
         <h1><?php echo htmlspecialchars($article['title']); ?></h1>
         <p><?php echo nl2br(htmlspecialchars($article['content'])); ?></p>
+        <div class="like-div">
+        <svg xmlns="http://www.w3.org/2000/svg" id="like-icon" height="40px" viewBox="0 -960 960 960" width="40px" fill="white"><path d="m480-147.34-35.9-32.51q-101.87-93.03-168.34-160.06-66.48-67.04-105.59-119.1-39.12-52.07-54.64-94.34Q100-595.63 100-638.46q0-83.25 56.14-139.39Q212.28-834 295.13-834q54.69 0 102.05 26.94 47.36 26.93 82.82 77.99 38.44-52.54 84.89-78.74Q611.34-834 664.87-834q82.85 0 138.99 56.15Q860-721.71 860-638.46q0 42.83-15.53 85.11-15.52 42.27-54.61 94.28-39.08 52.01-105.52 119.1T515.9-179.85L480-147.34Zm0-67.12q98.48-89.65 162.08-153.68 63.6-64.03 100.89-111.79 37.29-47.76 52.03-84.89 14.74-37.13 14.74-73.55 0-62.81-41.07-104.09-41.08-41.28-103.65-41.28-49.89 0-91.88 29.32-41.99 29.32-71.14 85.09h-44.41q-29.13-55.49-71.05-84.95t-91.56-29.46q-62.19 0-103.45 41.28-41.27 41.28-41.27 104.29 0 36.38 14.78 73.64 14.79 37.27 51.9 85.19 37.11 47.93 101.14 111.66Q382.1-303.95 480-214.46Zm0-284.64Z"/></svg>
+            <?php echo htmlspecialchars($article['likes']);  ?>
+        </div>
     </section>
 
     <!-- <section class="whole-article">
@@ -136,6 +139,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         <h1>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Suscipit, debitis.</h1>
         <P>Lorem ipsum dolor sit amet consectetur adipisicing elit. Tenetur ipsa reiciendis voluptatem delectus temporibus eligendi esse culpa facere a architecto nesciunt deserunt voluptatum aspernatur aut, perferendis aliquid recusandae? Quibusdam perspiciatis, veritatis aspernatur nulla ratione consectetur saepe possimus fugiat ut itaque? In itaque corporis perferendis nam dolorem mollitia vel laudantium eaque natus officia possimus tenetur consequuntur nulla adipisci quisquam voluptatum, consequatur fugiat hic? Excepturi in veniam, quo consequuntur deleniti ducimus, saepe tempore ex sunt labore provident neque culpa nisi officia voluptatum consectetur magni impedit delectus sed. Blanditiis numquam quis quos suscipit debitis sed minus reiciendis architecto. Sint non animi eos voluptate.</P>
     </section> -->
+    <script src="Script.js?v=<?php echo time(); ?>"></script>
 </body>
 
 </html>

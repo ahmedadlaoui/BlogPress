@@ -32,7 +32,6 @@ CREATE TABLE IF NOT EXISTS comments (
     article_id INT NOT NULL,
     user_id INT NOT NULL,
     content TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (article_id) REFERENCES articles(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
@@ -41,7 +40,6 @@ CREATE TABLE IF NOT EXISTS likes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     article_id INT NOT NULL,
     user_id INT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (article_id) REFERENCES articles(id) ON DELETE CASCADE,
     FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
 );
@@ -49,10 +47,9 @@ CREATE TABLE IF NOT EXISTS likes (
 CREATE TABLE IF NOT EXISTS views (
     id INT AUTO_INCREMENT PRIMARY KEY,
     article_id INT NOT NULL,
-    user_ip VARCHAR(255) NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (article_id) REFERENCES articles(id) ON DELETE CASCADE
 );
+
 -- @block
 INSERT INTO users (username, email, password, role) VALUES
 ('author1', 'author1@example.com', 'hashed_password_1', 'author'),
@@ -78,4 +75,6 @@ LIMIT 1;
 DESCRIBE articles;
 -- @block
 ALTER TABLE articles ADD COLUMN username VARCHAR(255);
+-- @block
+ALTER TABLE articles ADD COLUMN comments INT;
 

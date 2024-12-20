@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-article'])) {
 
             <?php
             if (isset($_SESSION['role']) && $_SESSION['role'] == 'author') {
-                echo '<a href="authordashboard.php"><li>Your articles</li></a>';
+                echo '<a href="authordashboard.php"><li>Dashboard</li></a>';
             }
             ?>
         </ul>
@@ -137,11 +137,71 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-article'])) {
 
     </section>
 
+    <main>
+        <div style="width:60%;">
+            <h1 id="stc">Your statistics :</h1>
+            <canvas id="myChart"></canvas>
+        </div>
+
+
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script>
+  
+        var totalviews = 
+            <?php  
+                    $stmt = $conn->prepare("SELECT SUM(views) AS total_views FROM articles WHERE user_id = :author_id");
+                    $stmt->execute(['author_id' => $_SESSION['user_id']]);
+                    $total_views = $stmt->fetchColumn() ?? 0;
+                    echo $total_views;
+            ?>
+        
+        var totallikes = 
+            <?php  
+                    $stmt = $conn->prepare("SELECT SUM(likes) AS total_likes FROM articles WHERE user_id = :author_id");
+                    $stmt->execute(['author_id' => $_SESSION['user_id']]);
+                    $total_likes = $stmt->fetchColumn() ?? 0;
+                    echo $total_likes;
+            ?>
+        
+        var totalcomments = 
+            <?php  
+                    $stmt = $conn->prepare("SELECT SUM(comments) AS total_comments FROM articles WHERE user_id = :author_id");
+                    $stmt->execute(['author_id' => $_SESSION['user_id']]);
+                    $total_comments = $stmt->fetchColumn() ?? 0;
+                    echo $total_comments;
+            ?>
+
+
+        const ctx = document.getElementById('myChart');
+
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['total views','total comments', 'total likes'],
+                datasets: [{
+                    label: 'Records',
+                    data: [totalviews,totalcomments, totallikes],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+
 
 
 
     <section class="mainsec">
-
+    <h1 id="ya">Your articles :</h1>
         <div class="side">
             <?php
             $author_id = $_SESSION['user_id'];
@@ -178,7 +238,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-article'])) {
         </div>
 
         <form class="content-form" method="POST">
-            <h1 style="margin-bottom: 24px;font-family:roboto;border-bottom:1px solid white;width:100%;">Add new article :</h1>
+            <h1 style="margin-bottom: 24px;border-bottom:1px solid #FFC067;width:100%;color:#FFC067;">Add new article :</h1>
             <input type="text" name="title" id="title" placeholder="Title :" required>
             <textarea name="content" id="content" placeholder="Content :" required></textarea>
             <input type="text" name="illustration" id="ilu" placeholder="Add illustration here (URL)...">
