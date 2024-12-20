@@ -72,9 +72,10 @@ DELETE FROM articles
 ORDER BY created_at ASC
 LIMIT 1;
 -- @block
-DESCRIBE articles;
+DESCRIBE comments;
+
 -- @block
-ALTER TABLE articles ADD COLUMN username VARCHAR(255);
+ALTER TABLE comments ADD COLUMN username VARCHAR(255);
 -- @block
-ALTER TABLE articles ADD COLUMN comments INT;
+SELECT * FROM comments;
 

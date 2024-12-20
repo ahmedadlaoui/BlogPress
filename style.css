@@ -672,4 +672,66 @@ main {
   text-align: start;
   margin-bottom: 8px;
   border-bottom: 1px solid #FFC067;
+}
+
+.comments {
+  width: 40%;
+  min-width: 280px;
+  margin: auto;
+  color: rgb(209, 209, 209);
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 12px;
+  max-height: 600px;
+  margin-bottom: 50px;
+  scale: 0.9;
+}
+.comments h4, .comments p {
+  font-family: roboto;
+}
+
+.addcomment {
+  min-width: 280px;
+  width: 40%;
+  margin: auto;
+  scale: 0.9;
+}
+.addcomment h1 {
+  margin-bottom: 12px;
+  color: #FFC067;
+  border-bottom: 1px solid #FFC067;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.addcomment h1 button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  border-radius: 50%;
+  padding: 8px;
+  transition: 0.4s all;
+}
+.addcomment h1 button:hover {
+  background-color: rgb(33, 33, 33);
+}
+.addcomment .comment-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  row-gap: 6px;
+}
+.addcomment .comment-form input {
+  background-color: transparent;
+  padding: 6px;
+  color: white;
+}
+.addcomment .comment-form button {
+  background-color: transparent;
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #FFC067;
+  cursor: pointer;
 }/*# sourceMappingURL=style.css.map */

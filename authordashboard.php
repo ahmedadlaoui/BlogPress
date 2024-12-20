@@ -149,29 +149,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-article'])) {
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <script>
-  
-        var totalviews = 
-            <?php  
-                    $stmt = $conn->prepare("SELECT SUM(views) AS total_views FROM articles WHERE user_id = :author_id");
-                    $stmt->execute(['author_id' => $_SESSION['user_id']]);
-                    $total_views = $stmt->fetchColumn() ?? 0;
-                    echo $total_views;
+        var totalviews =
+            <?php
+            $stmt = $conn->prepare("SELECT SUM(views) AS total_views FROM articles WHERE user_id = :author_id");
+            $stmt->execute(['author_id' => $_SESSION['user_id']]);
+            $total_views = $stmt->fetchColumn() ?? 0;
+            echo $total_views;
             ?>
-        
-        var totallikes = 
-            <?php  
-                    $stmt = $conn->prepare("SELECT SUM(likes) AS total_likes FROM articles WHERE user_id = :author_id");
-                    $stmt->execute(['author_id' => $_SESSION['user_id']]);
-                    $total_likes = $stmt->fetchColumn() ?? 0;
-                    echo $total_likes;
+
+        var totallikes =
+            <?php
+            $stmt = $conn->prepare("SELECT SUM(likes) AS total_likes FROM articles WHERE user_id = :author_id");
+            $stmt->execute(['author_id' => $_SESSION['user_id']]);
+            $total_likes = $stmt->fetchColumn() ?? 0;
+            echo $total_likes;
             ?>
-        
-        var totalcomments = 
-            <?php  
-                    $stmt = $conn->prepare("SELECT SUM(comments) AS total_comments FROM articles WHERE user_id = :author_id");
-                    $stmt->execute(['author_id' => $_SESSION['user_id']]);
-                    $total_comments = $stmt->fetchColumn() ?? 0;
-                    echo $total_comments;
+
+        var totalcomments =
+            <?php
+            $stmt = $conn->prepare("SELECT SUM(comments) AS total_comments FROM articles WHERE user_id = :author_id");
+            $stmt->execute(['author_id' => $_SESSION['user_id']]);
+            $total_comments = $stmt->fetchColumn() ?? 0;
+            echo $total_comments;
             ?>
 
 
@@ -180,19 +179,44 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-article'])) {
         new Chart(ctx, {
             type: 'bar',
             data: {
-                labels: ['total views','total comments', 'total likes'],
+                labels: ['total views', 'total comments', 'total likes'],
                 datasets: [{
                     label: 'Records',
-                    data: [totalviews,totalcomments, totallikes],
-                    borderWidth: 2
+                    data: [totalviews, totalcomments, totallikes],
+                    borderWidth: 2,
+                    backgroundColor: [
+                        'rgb(86, 255, 249,0.1)',
+                        'rgba(54, 162, 235, 1,0.1)',
+                        'rgba(255, 99, 132, 1,0.1)'
+                    ],
+                    borderColor: [
+                        'rgb(86, 255, 249)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 99, 132, 1)'
+                    ]
                 }]
             },
             options: {
                 scales: {
+                    x: {
+                        ticks: {
+                            color: 'white',
+                            font: {
+                                size: 14
+                            }
+                        },
+                    },
                     y: {
+                        ticks: {
+                            color: 'white',
+                            font: {
+                                size: 14
+                            }
+
+                        },
                         beginAtZero: true
                     }
-                }
+                },
             }
         });
     </script>
@@ -201,7 +225,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-article'])) {
 
 
     <section class="mainsec">
-    <h1 id="ya">Your articles :</h1>
+        <h1 id="ya">Your articles :</h1>
         <div class="side">
             <?php
             $author_id = $_SESSION['user_id'];
