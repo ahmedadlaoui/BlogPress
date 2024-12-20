@@ -182,12 +182,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-article'])) {
                 labels: ['total views', 'total comments', 'total likes'],
                 datasets: [{
                     label: 'Records',
-                    data: [totalviews, totalcomments, totallikes],
+                    data: [totalviews,totalcomments,totallikes],
                     borderWidth: 2,
                     backgroundColor: [
-                        'rgb(86, 255, 249,0.1)',
-                        'rgba(54, 162, 235, 1,0.1)',
-                        'rgba(255, 99, 132, 1,0.1)'
+                        'rgb(86, 255, 249, 0.1)',
+                        'rgba(54, 162, 235, 1, 0.1)',
+                        'rgba(255, 99, 132, 1, 0.1)'
                     ],
                     borderColor: [
                         'rgb(86, 255, 249)',

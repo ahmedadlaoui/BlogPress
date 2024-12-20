@@ -14,13 +14,11 @@ try {
 }
 if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     $article_id = $_GET['id'];
-
     $query = "SELECT * FROM articles WHERE id = :id";
     $stmt = $conn->prepare($query);
     $stmt->bindParam(':id', $article_id, PDO::PARAM_INT);
     $stmt->execute();
     $article = $stmt->fetch(PDO::FETCH_ASSOC);
-
     if (!$article) {
         header("Location: index.php");
         exit;
@@ -51,10 +49,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-comment'])) {
             $stmt->bindParam(':content', $comment_content);
             $stmt->bindParam(':article_ID', $article_ID);
             $stmt->execute();
+            header("location : Article.php?id= $article_ID ");
             exit;
-        } 
-        
-        catch (PDOException $e) {
+        } catch (PDOException $e) {
             echo "Error adding comment " . $e->getMessage();
         }
     }
@@ -183,10 +180,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-comment'])) {
 
     <section class="comments">
 
-        <div class="comment">
-            <h4>Ahmed Adlaoui :</h4>
-            <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nemo mollitia dignissimos saepe! Cum architecto itaque et consequatur, ullam earum suscipit nulla aut eaque ut aspernatur maiores nihil blanditiis, illo facilis!</p>
-        </div>
+        <?php
+
+
+        $stmt = $conn->prepare("SELECT * FROM comments WHERE article_id = :idd");
+        $stmt->bindParam(':idd', $_GET['id'], PDO::PARAM_INT);
+        $stmt->execute();
+        $comments = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        foreach ($comments as $comment) {
+            echo '<div class="comment">
+                <h4>' . $comment['username'] . '</h4>
+                <p>' . $comment['content'] . '</p>
+            </div>';
+        }
+
+
+        ?>
     </section>
 
     <script src="Script.js?v=<?php echo time(); ?>"></script>
