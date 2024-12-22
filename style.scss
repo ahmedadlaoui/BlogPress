@@ -698,4 +698,13 @@ main{
         }
     }
 }
+#delete-post{
+    position: absolute;
+    background-color: transparent;
+    border: none;
+    color: red;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
 

@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['logout'])) {
     session_destroy();
     header("Location: index.php");
     exit;
-}
+}   
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-article'])) {
     $title = trim($_POST['title']);
@@ -45,6 +45,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-article'])) {
         } catch (PDOException $e) {
             echo "Error adding article: " . $e->getMessage();
         }
+    }
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['article_id'])) {
+    $articleId = intval($_POST['article_id']); // Sanitize input
+
+    try {
+
+        $stmt = $conn->prepare("DELETE FROM articles WHERE id = :idtd");
+        $stmt->bindParam(':idtd', $articleId, PDO::PARAM_INT);
+        $stmt->execute();
+
+
+        $stmt = $conn->prepare("DELETE FROM comments WHERE article_id = :cmtid");
+        $stmt->bindParam(':cmtid', $articleId, PDO::PARAM_INT);
+        $stmt->execute();
+
+
+        $stmt = $conn->prepare("DELETE FROM likes WHERE article_id = :likeid");
+        $stmt->bindParam(':likeid', $articleId, PDO::PARAM_INT);
+        $stmt->execute();
+
+    } catch (Exception $e) {
+        echo "An error occurred: " . $e->getMessage();
     }
 }
 
@@ -230,10 +254,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-article'])) {
             <?php
             $author_id = $_SESSION['user_id'];
             $stmt = $conn->prepare("
-        SELECT a.id, a.title, a.poster, a.views, 
-               (SELECT COUNT(*) FROM comments c WHERE c.article_id = a.id) AS comment_count 
-        FROM articles a 
-        WHERE a.user_id = :author_id
+        SELECT articles.id, articles.title, articles.poster, articles.views, 
+               (SELECT COUNT(*) FROM comments  WHERE comments.article_id = articles.id) AS comment_count 
+        FROM articles  
+        WHERE articles.user_id = :author_id
     ");
             $stmt->bindParam(':author_id', $author_id);
             $stmt->execute();
@@ -252,11 +276,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['submit-article'])) {
                             <img src="images/NEwview.svg" alt="Views Icon">
                             <?= htmlspecialchars($article['views']) ?>
                         </div>
+
+
+                        <form action="authordashboard.php" method="post" >
+                        <input type="hidden" name="article_id" value="<?php echo htmlspecialchars($article['id']); ?>">
+                            <button id="delete-post" type="submit">Delete</button>
+                        </form>
+
+
                     </div>
                 </div>
             <?php
             }
             ?>
+            
         </div>
 
         </div>
